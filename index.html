@@ -54,7 +54,6 @@
 
   <h1>Hallo Valentin</h1>
 
-  <!-- Alles was später komplett verschwinden soll -->
   <div id="content">
 
     <!-- STEP 1 -->
@@ -87,7 +86,7 @@
 
   <!-- Final message -->
   <div id="finalMessage" class="box hidden">
-    Danke fürs Mitmachen Bebo hier meine erste Website muhahahahahaha ich werd reicher als du sag ich 💛
+    Danke fürs Mitmachen Bebo 💛
   </div>
 
   <footer>
@@ -101,42 +100,37 @@
     let timer = null;
 
     function step1() {
-      // Text1 + Button1 weg
       document.getElementById("text1").classList.add("hidden");
       document.getElementById("btn1").classList.add("hidden");
 
-      // Text2 + Button2 rein
       document.getElementById("text2").classList.remove("hidden");
       document.getElementById("btn2").classList.remove("hidden");
     }
 
     function step2() {
-      // Text2 + Button2 weg
       document.getElementById("text2").classList.add("hidden");
       document.getElementById("btn2").classList.add("hidden");
 
-      // Text3 + Button3 + Herzbereich rein
       document.getElementById("text3").classList.remove("hidden");
       document.getElementById("btn3").classList.remove("hidden");
-      document.getElementById("heartArea").classList.remove("hidden");
     }
 
     function step3() {
-      // Text3 + Button3 weg (Herz bleibt)
       document.getElementById("text3").classList.add("hidden");
       document.getElementById("btn3").classList.add("hidden");
+
+      document.getElementById("heartArea").classList.remove("hidden");
+      document.getElementById("clickMeBtn").classList.remove("hidden");
     }
 
     function startGame() {
       if (gameActive) return;
 
-      // Reset
       score = 0;
       timeLeft = 5;
       document.getElementById("score").innerText = score;
       document.getElementById("time").innerText = timeLeft;
 
-      // Zeige Spiel-Info
       document.getElementById("gameInfo").classList.remove("hidden");
 
       gameActive = true;
@@ -162,7 +156,6 @@
       timer = null;
       gameActive = false;
 
-      // Alles ausblenden außer Footer
       document.getElementById("content").classList.add("hidden");
       document.getElementById("finalMessage").classList.remove("hidden");
     }
@@ -170,9 +163,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
