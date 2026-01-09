@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Game</title>
+
+  <style>
+    body {
+      background-color: #fff9c4;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .hidden { display: none; }
+
+    .box {
+      margin: 15px auto;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f2f2f2;
+      width: 400px;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .heart {
+      font-size: 90px;
+      margin-top: 20px;
+      cursor: pointer;
+      animation: pulse 1s infinite;
+      user-select: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Meine interaktive Seite</h1>
+
+  <!-- Alles was später komplett verschwinden soll -->
+  <div id="content">
+
+    <!-- STEP 1 -->
+    <div id="text1" class="box">xxx</div>
+    <button id="btn1" onclick="step1()">Button 1</button>
+
+    <!-- STEP 2 -->
+    <div id="text2" class="box hidden">xxx</div>
+    <button id="btn2" class="hidden" onclick="step2()">Button 2</button>
+
+    <!-- STEP 3 -->
+    <div id="text3" class="box hidden">xxx</div>
+    <button id="btn3" class="hidden" onclick="step3()">Button 3</button>
+
+    <!-- Herz + Klick-mich-Button -->
+    <div id="heartArea" class="hidden">
+      <div id="heart" class="heart" onclick="heartClicked()">❤️</div>
+      <button id="clickMeBtn" onclick="startGame()">Klick mich!</button>
+    </div>
+
+    <!-- Game Info -->
+    <div id="gameInfo" class="box hidden">
+      Drück das Herz so oft du kannst!
+      <div style="margin-top:10px;">
+        Punkte: <span id="score">0</span> | Zeit: <span id="time">5</span>s
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Final message -->
+  <div id="finalMessage" class="box hidden">
+    Danke fürs Mitmachen 💛
+  </div>
+
+  <footer>
+    Website von Aylin – der tollsten Person der Welt erstellt ✨
+  </footer>
+
+  <script>
+    let score = 0;
+    let timeLeft = 5;
+    let gameActive = false;
+    let timer = null;
+
+    function step1() {
+      // Text1 + Button1 weg
+      document.getElementById("text1").classList.add("hidden");
+      document.getElementById("btn1").classList.add("hidden");
+
+      // Text2 + Button2 rein
+      document.getElementById("text2").classList.remove("hidden");
+      document.getElementById("btn2").classList.remove("hidden");
+    }
+
+    function step2() {
+      // Text2 + Button2 weg
+      document.getElementById("text2").classList.add("hidden");
+      document.getElementById("btn2").classList.add("hidden");
+
+      // Text3 + Button3 + Herzbereich rein
+      document.getElementById("text3").classList.remove("hidden");
+      document.getElementById("btn3").classList.remove("hidden");
+      document.getElementById("heartArea").classList.remove("hidden");
+    }
+
+    function step3() {
+      // Text3 + Button3 weg (Herz bleibt)
+      document.getElementById("text3").classList.add("hidden");
+      document.getElementById("btn3").classList.add("hidden");
+    }
+
+    function startGame() {
+      if (gameActive) return;
+
+      // Reset
+      score = 0;
+      timeLeft = 5;
+      document.getElementById("score").innerText = score;
+      document.getElementById("time").innerText = timeLeft;
+
+      // Zeige Spiel-Info
+      document.getElementById("gameInfo").classList.remove("hidden");
+
+      gameActive = true;
+
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("time").innerText = timeLeft;
+
+        if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function heartClicked() {
+      if (!gameActive) return;
+      score++;
+      document.getElementById("score").innerText = score;
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      timer = null;
+      gameActive = false;
+
+      // Alles ausblenden außer Footer
+      document.getElementById("content").classList.add("hidden");
+      document.getElementById("finalMessage").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
