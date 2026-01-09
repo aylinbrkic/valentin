@@ -68,10 +68,10 @@
     <div id="text3" class="box hidden">Okay ich glaub dir mein Herz</div>
     <button id="btn3" class="hidden" onclick="step3()">Lass was Spielen aber bitte kein Schach...bin ein Loser.</button>
 
-    <!-- Herz + Klick-mich-Button -->
+    <!-- Herz (nur fürs Spiel) -->
     <div id="heartArea" class="box hidden">
       <div id="heart" class="heart" onclick="heartClicked()">❤️</div>
-      <button id="clickMeBtn" class="hidden" onclick="startGame()">Oki, drück hier drauf!</button>
+      <div style="margin-top:6px; font-weight:bold;">Klick mich!</div>
     </div>
 
     <!-- Game Info -->
@@ -86,7 +86,7 @@
 
   <!-- Final message -->
   <div id="finalMessage" class="box hidden">
-    Danke fürs Mitmachen Bebo 💛
+    Danke fürs Mitmachen Bebo hier meine erste Website muhahahahahaha ich werd reicher als du sag ich 💛
   </div>
 
   <footer>
@@ -116,11 +116,16 @@
     }
 
     function step3() {
+      // Step 3 Inhalt weg
       document.getElementById("text3").classList.add("hidden");
       document.getElementById("btn3").classList.add("hidden");
 
+      // Spiel-UI zeigen
       document.getElementById("heartArea").classList.remove("hidden");
-      document.getElementById("clickMeBtn").classList.remove("hidden");
+      document.getElementById("gameInfo").classList.remove("hidden");
+
+      // Spiel sofort starten
+      startGame();
     }
 
     function startGame() {
@@ -130,8 +135,6 @@
       timeLeft = 5;
       document.getElementById("score").innerText = score;
       document.getElementById("time").innerText = timeLeft;
-
-      document.getElementById("gameInfo").classList.remove("hidden");
 
       gameActive = true;
 
@@ -156,6 +159,7 @@
       timer = null;
       gameActive = false;
 
+      // Alles ausblenden außer Footer
       document.getElementById("content").classList.add("hidden");
       document.getElementById("finalMessage").classList.remove("hidden");
     }
